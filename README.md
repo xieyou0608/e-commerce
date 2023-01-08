@@ -34,23 +34,29 @@
 ## 專案發展流程
 環境建置
 1. 確定使用的 Tech Stack
-2. 使用 nx 建立 monorepo
-3. 初始化 Next.js + MUI + TypeScript
-4. 初始化 Node.js + Express.js
-5. 跟資料庫連線
-6. 建 docker 推上 AWS (或先用 Vercel 架網站)
+2. 使用 nx 建立 monorepo (Next.js & Express.js)
+3. 前端設定 Tailwind CSS
+4. 後端跟 AWS RDS 連線
+5. 建 docker 推上 AWS (或先用 Vercel 架網站)
+
+功能規劃 
+
+6. 蒐集基本需求，簡單撰寫 Design Document
+7. 依 Fake Store API 設計資料庫
+8. 規劃前端頁面
 
 基本功能開發
 
-7. 前端用 Fake Store API 切版
-8. 後端依 Fake Store API 規劃資料庫，並抓資料存進資料庫
-9. 增加新版面及串接 API
-10. 以 useContext + useReducer 及 useEffect + fetch 完成基本功能
+9. 前端用 Fake Store API 簡單切版
+10. 後端依 Fake Store API 規劃資料庫，並抓資料存進資料庫
+11. 後端建 REST API(登入、取得資料、下訂單)
+12. 前端增加新版面及串接 API
+13. 以 useContext + useReducer 及 useEffect + fetch 完成基本功能
 
 進階開發  
 
-11. 引入 RxJS 跟 useSWR 進行重構
-12. 建立商店後台，引入圖表套件
+14. 引入 RxJS 跟 useSWR 進行重構
+15. 建立商店後台，引入圖表套件
 
 ## Note
 ##### 進度限制

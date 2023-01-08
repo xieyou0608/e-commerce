@@ -18,7 +18,7 @@
 |部署|AWS|
 
 ##### 前端使用技術
-- Material UI 
+- ~~Material UI~~ Tailwind CSS
 - useContext + useReducer 管理不常變動的狀態(登入)
 - RxJS 的 Redux-Observable 管理常變動的狀態(購物車)
 
@@ -66,7 +66,9 @@
 
 ##### CSS or UI 框架選擇
 TailwindCSS vs MUI vs Chakra UI  
-需要現成 UI，另外 MUI 有 sx 跟 styled component，選擇 MUI
+~~需要現成 UI，另外 MUI 有 sx 跟 styled component，選擇 MUI~~  
+決定用 Tailwind CSS  
+一方面設定教學多，一方面避免 SSR 處理樣式可能出現的坑
 
 ##### 為甚麼要用 Monorepo
 想學 (想要乾淨的 github 首頁)

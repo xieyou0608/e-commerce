@@ -6,6 +6,10 @@ module.exports = {
     './apps/next-app/src/components/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
+    fontFamily: {
+      notoSansTC: ['Noto Sans TC', 'sans-serif'],
+      notoSerifTC: ['Noto Serif TC', 'serif'],
+    },
     extend: {},
   },
   plugins: [],

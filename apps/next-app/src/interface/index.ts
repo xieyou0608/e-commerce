@@ -25,7 +25,8 @@ export type UserType = {
   phone: string;
 };
 
-export type CartType = {
+export type CartItemType = {
   product: ProductType;
   quantity: number;
-}[];
+};
+export type CartType = CartItemType[];

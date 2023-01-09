@@ -1,13 +1,15 @@
-import React from 'react';
-import { ProductType } from 'apps/next-app/interface';
+import React, { useContext } from 'react';
+import { ProductType } from '../../interface';
 import Image from 'next/image';
 import Stars from '../UI/Stars';
+import { CartContext } from '../../context/cart-context';
 type Props = {
   product: ProductType;
   closeModal: () => void;
 };
 
 const ProductModal = ({ product, closeModal }: Props) => {
+  const addToCart = useContext(CartContext).addToCart;
   return (
     <>
       <div
@@ -41,9 +43,12 @@ const ProductModal = ({ product, closeModal }: Props) => {
           <footer className="flex justify-between items-center">
             <h5 className="text-rose-600">$ {product.price}</h5>
             <button className="p-3 border border-rose-600 rounded-lg ">
-              商品資訊
+              詳細資訊
             </button>
-            <button className="p-3 border border-rose-600 bg-rose-600 rounded-lg text-white">
+            <button
+              onClick={() => addToCart(product, 1)}
+              className="p-3 border border-rose-600 bg-rose-600 rounded-lg text-white"
+            >
               加入購物車
             </button>
           </footer>

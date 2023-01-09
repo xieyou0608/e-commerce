@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import React, { useState } from 'react';
-import { ProductType } from 'apps/next-app/interface';
+import { ProductType } from '../interface';
 import ProductCard from '../components/product/ProductCard';
 import ProductModal from '../components/product/ProductModal';
 

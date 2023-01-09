@@ -12,7 +12,7 @@ export type OrderType = {
   id: string;
   userId: number;
   date: string;
-  products: { productId: number; quantity: number };
+  products: { productId: number; quantity: number }[];
 };
 
 export type UserType = {
@@ -24,3 +24,8 @@ export type UserType = {
   address?: any;
   phone: string;
 };
+
+export type CartType = {
+  product: ProductType;
+  quantity: number;
+}[];

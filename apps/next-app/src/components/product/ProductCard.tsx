@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { ProductType } from 'apps/next-app/interface';
+import { ProductType } from '../../interface';
 import Stars from '../UI/Stars';
 
 type Props = {

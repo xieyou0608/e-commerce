@@ -52,13 +52,14 @@
 10. 後端依 Fake Store API 規劃資料庫，並抓資料存進資料庫
 11. 後端建 REST API(登入、取得資料、下訂單)
 12. 前端增加新版面及串接 API
-13. 以 useContext + useReducer 及 useEffect + fetch 完成基本功能
+13. 以 useState props drilling 及 useEffect + fetch 完成基本功能
 
 進階開發  
 
-14. 引入 RxJS 跟 useSWR 進行重構
-15. 建立商店後台，引入圖表套件
-16. 在 Local 端跟 AWS RDS 建 MySQL 資料庫~~ (
+14. 以 useContext + useReducer 重構登入狀態
+15. 引入 RxJS 跟 useSWR 進行重構
+16. 建立商店後台，引入圖表套件
+17. 在 Local 端跟 AWS RDS 建 MySQL 資料庫
 
 ## Note
 ##### 進度限制

@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
-import CartPreview from '../CartPreview';
+import CartPreview from '../cart/CartPreview';
 import { CartContext } from '../../context/cart-context';
 const Navbar = () => {
-  const cart = useContext(CartContext).cart;
+  const { cart, setCart } = useContext(CartContext);
   const totalQty = cart.reduce((accu, item) => accu + item.quantity, 0);
 
   const [showCart, setShowCart] = useState(false);
@@ -14,6 +14,22 @@ const Navbar = () => {
   const closeCart = () => {
     setShowCart(false);
   };
+
+  // localStorage 不能在 context 用，因為 Next.js SSR
+  // useContext 不能再 _app.js 用，因為要在 provider 底下才能用 context
+  // 先放在 navbar 來處理雙向綁定，讓網頁重整之後 cart 不會清空
+  useEffect(() => {
+    const tempCart = JSON.parse(localStorage.getItem('cart'));
+    if (tempCart && tempCart.length > 0) {
+      setCart(tempCart);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart]);
 
   return (
     <nav className="w-full h-[10vh] bg-gray-500 sticky top-0 flex justify-between items-center px-10 z-50">

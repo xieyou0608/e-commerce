@@ -13,7 +13,7 @@ const nextConfig = {
     svgr: false,
   },
   images: {
-    domains: ['fakestoreapi.com'],
+    domains: ['fakestoreapi.com', 'i.imgur.com'],
   },
 };
 

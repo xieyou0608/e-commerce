@@ -5,6 +5,7 @@ type CartContextType = {
   cart: CartType;
   addToCart: (product: ProductType, quantity: number) => void;
   removeFromCart: (product: ProductType) => void;
+  clearCart: () => void;
   setCart: React.Dispatch<React.SetStateAction<CartType>>;
 };
 
@@ -12,6 +13,7 @@ export const CartContext = React.createContext<CartContextType>({
   cart: [],
   addToCart: () => {},
   removeFromCart: () => {},
+  clearCart: () => {},
   setCart: () => {},
 });
 
@@ -47,8 +49,14 @@ const CartProvider = (props) => {
     });
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, setCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart, setCart }}
+    >
       {props.children}
     </CartContext.Provider>
   );

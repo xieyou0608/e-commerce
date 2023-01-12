@@ -16,13 +16,13 @@ export type OrderType = {
 };
 
 export type UserType = {
-  id: string;
+  idToken: string;
   email: string;
-  username: string;
-  password: string;
-  name: { firstname: string; lastname: string };
+  userId: string;
+  username?: string;
+  name?: { firstname: string; lastname: string };
   address?: any;
-  phone: string;
+  phone?: string;
 };
 
 export type CartItemType = {

@@ -3,8 +3,10 @@ import { FaUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import CartPreview from '../cart/CartPreview';
 import { CartContext } from '../../context/cart-context';
+import { UserContext } from '../../context/user-context';
 const Navbar = () => {
   const { cart, setCart } = useContext(CartContext);
+  const { user, login } = useContext(UserContext);
   const totalQty = cart.reduce((accu, item) => accu + item.quantity, 0);
 
   const [showCart, setShowCart] = useState(false);
@@ -23,6 +25,11 @@ const Navbar = () => {
     if (tempCart && tempCart.length > 0) {
       setCart(tempCart);
     }
+    const tempUser = JSON.parse(localStorage.getItem('user'));
+    console.log(tempUser);
+    if (tempUser) {
+      login(tempUser);
+    }
   }, []);
 
   useEffect(() => {
@@ -36,7 +43,7 @@ const Navbar = () => {
       <h4 className="text-white">
         <Link href="/">Store</Link>
       </h4>
-      <div className="flex gap-x-10">
+      <div className="flex gap-x-10 items-center">
         <Link
           href="/cart"
           onMouseEnter={openCart}
@@ -48,9 +55,9 @@ const Navbar = () => {
             {totalQty}
           </span>
         </Link>
-        <button className="text-white">
+        <Link href={user ? '/profile' : '/login'} className="text-white">
           <FaUserCircle size={25} />
-        </button>
+        </Link>
       </div>
       <div
         onMouseEnter={openCart}

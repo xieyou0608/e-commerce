@@ -2,23 +2,47 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { CartContext } from '../context/cart-context';
+import { UserContext } from '../context/user-context';
 
 const checkoutPage = () => {
-  const clearCart = useContext(CartContext).clearCart;
+  const { cart, clearCart } = useContext(CartContext);
+  const user = useContext(UserContext).user;
   const router = useRouter();
   const { register, handleSubmit } = useForm();
-  const username = 'username';
-  const phone = 'phone';
-  const email = 'email';
-  const address = 'address';
-  const store = 'store';
-  const submitForm = (formObj, e) => {
+
+  const submitForm = async (formObj, e) => {
     e.preventDefault();
     console.log(formObj);
 
-    clearCart();
-    window.alert('下訂成功');
-    router.push('/');
+    const orderBody = {
+      username: formObj.username,
+      phone: formObj.phone,
+      store: formObj.store,
+      products: cart,
+      status: '待出貨',
+      date: new Date().toString(),
+    };
+
+    const res = await fetch(
+      `https://e-commerce-bdf1f-default-rtdb.asia-southeast1.firebasedatabase.app/orders/${user.userId}.json?auth=${user.idToken}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(orderBody),
+      }
+    );
+    const data = await res.json();
+    if (res.status === 200) {
+      console.log(data);
+      clearCart();
+      window.alert('下訂成功');
+      router.push('/profile');
+    } else {
+      console.log(data);
+      window.alert('發生錯誤，請重新嘗試');
+    }
   };
 
   return (
@@ -28,24 +52,25 @@ const checkoutPage = () => {
         <form onSubmit={handleSubmit(submitForm)}>
           <div className="flex flex-col [&_div]:my-3 [&_label]:mr-3 [&_input]:border-gray-300 [&_input]:border">
             <div>
-              <label htmlFor={username}>取貨姓名</label>
-              <input type="text" {...register(username)} />
+              <label htmlFor={'username'}>取貨姓名</label>
+              <input type="text" {...register('username')} />
             </div>
             <div>
-              <label htmlFor={phone}>手機號碼</label>
-              <input type="text" {...register(phone)} />
+              <label htmlFor={'phone'}>手機號碼</label>
+              <input type="text" {...register('phone')} />
             </div>
+            {/* <div>
+              <label htmlFor={'email'}>信箱</label>
+              <input
+                type="text"
+                {...register('email')}
+                defaultValue={user.email}
+              />
+            </div> */}
+
             <div>
-              <label htmlFor={email}>信箱</label>
-              <input type="text" {...register(email)} />
-            </div>
-            <div>
-              <label htmlFor={address}>地址</label>
-              <input {...register(address)} />
-            </div>
-            <div>
-              <label htmlFor={store}>取貨門市</label>
-              <input type="text" {...register(store)} />
+              <label htmlFor={'store'}>取貨門市</label>
+              <input type="text" {...register('store')} />
             </div>
           </div>
           <footer className="flex justify-end p-2">

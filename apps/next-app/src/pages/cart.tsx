@@ -1,12 +1,24 @@
 import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
 import { CartContext } from '../context/cart-context';
-import Link from 'next/link';
 import CartRow from '../components/cart/CartRow';
+import { UserContext } from '../context/user-context';
 const cartPage = () => {
+  const router = useRouter();
   const { cart } = useContext(CartContext);
+  const { user } = useContext(UserContext);
   const totalPrice = cart
     .reduce((accu, item) => accu + item.product.price * item.quantity, 0)
     .toFixed(2);
+
+  const handleCheckout = () => {
+    if (user) {
+      router.push('/checkout');
+    } else {
+      window.alert('請先登入');
+      router.push('/login');
+    }
+  };
 
   return (
     <div className="flex justify-center py-10">
@@ -29,12 +41,12 @@ const cartPage = () => {
         <footer className="w-full flex justify-end pr-3 mt-2">
           <div className="flex flex-col gap-y-3">
             <h5 className="text-rose-600">小計 $ {totalPrice}</h5>
-            <Link
-              href="/checkout"
+            <button
+              onClick={handleCheckout}
               className="px-2 py-2 border border-rose-600 bg-rose-600 rounded-sm text-center text-white text-sm"
             >
               前往結帳
-            </Link>
+            </button>
           </div>
         </footer>
       </main>

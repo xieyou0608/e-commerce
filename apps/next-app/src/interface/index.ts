@@ -11,8 +11,11 @@ export type ProductType = {
 export type OrderType = {
   id: string;
   userId: number;
-  date: string;
-  products: { productId: number; quantity: number }[];
+  username: string;
+  store: string;
+  date: Date;
+  products: { product: ProductType; quantity: number }[];
+  status: string;
 };
 
 export type UserType = {
